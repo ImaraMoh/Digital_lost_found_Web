@@ -11,10 +11,17 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
+app.listen(5000, () => {
+  console.log("Server running on port 5000");
+});
+
+// Routes
 app.get("/", (req, res) => {
   res.send("Lost & Found API running");
 });
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
-});
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/lost", require("./routes/Lost"));
+
+
+
